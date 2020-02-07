@@ -17,20 +17,14 @@ import org.reactivestreams.FlowAdapters
  * More precisely, it specifies the value of the subscription's [request][Subscription.request].
  * `1` is used by default.
  *
- * If any of the resulting
-  flow transformations fails, subscription is immediately cancelled and all in-flights elements
- * are discarded.*
- * This function is integrated with `ReactorContext` from `kotlinx-coroutines-reactor` module,
- * see its documentation for additional details.
+ * If any of the resulting flow transformations fails, subscription is immediately cancelled and
+ * all in-flights elements are discarded.
  */
 public fun <T : Any> Publisher<T>.asFlow(): Flow<T> =
         FlowAdapters.toPublisher(this).asFlow()
 
 /**
  * Transforms the given flow to a reactive specification compliant [Publisher].
- *
- * This function is integrated with `ReactorContext` from `kotlinx-coroutines-reactor` module,
- * see its documentation for additional details.
  */
 public fun <T : Any> Flow<T>.asPublisher(): Publisher<T> {
     val reactivePublisher : org.reactivestreams.Publisher<T> = this.asPublisher<T>()
